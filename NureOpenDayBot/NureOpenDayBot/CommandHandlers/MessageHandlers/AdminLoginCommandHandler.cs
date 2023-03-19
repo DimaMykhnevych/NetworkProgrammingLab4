@@ -59,7 +59,7 @@ namespace NureOpenDayBot.CommandHandlers.MessageHandlers
                 sb.AppendLine($"Id: {member.Id} \t Username: {member.Username ?? member.FirstName}");
             }
 
-            sb.AppendLine($"Загальна кількість подпісників: {members.Count()}");
+            sb.AppendLine($"Загальна кількість підписників: {members.Count()}");
             await _telegramBotClient.SendTextMessageAsync(
                     chatId: _message.Chat.Id,
                     text: sb.ToString(),
