@@ -10,6 +10,8 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 var botClient = new TelegramBotClient("{YOUR_TOKEN}");
 
 using CancellationTokenSource cts = new();
+
+// Creating update handlers factory.
 IGeneralUpdateHandlerFactory generalUpdateHandlerFactory = new GeneralUpdateHandlerFactory(botClient);
 
 // StartReceiving does not block the caller thread. Receiving is done on the ThreadPool.
@@ -18,6 +20,7 @@ ReceiverOptions receiverOptions = new()
     AllowedUpdates = Array.Empty<UpdateType>() // receive all update types
 };
 
+// Starting receiving updates.
 botClient.StartReceiving(
     updateHandler: HandleUpdateAsync,
     pollingErrorHandler: HandlePollingErrorAsync,
@@ -30,17 +33,22 @@ var me = await botClient.GetMeAsync();
 Console.WriteLine($"Start listening for @{me.Username}");
 Console.ReadLine();
 
-// Send cancellation request to stop bot
+// Send cancellation request to stop bot.
 cts.Cancel();
 
+/// <summary>
+/// Handles updates.
+/// </summary>
 async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
 {
+    // Getting required handler.
     var handler = generalUpdateHandlerFactory.Create(update);
     if (handler != null)
     {
         Console.WriteLine($"Handling {update.Type} update type");
         try
         {
+            // Handling request.
             await handler.HandleAsync(cancellationToken);
         }
         catch(ApiRequestException ex)
@@ -54,6 +62,9 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
     Console.WriteLine($"The {update.Type} update type is not supported yet");
 }
 
+/// <summary>
+/// Handles errors.
+/// </summary>
 Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
 {
     var ErrorMessage = exception switch

@@ -1,12 +1,21 @@
 ﻿namespace NureOpenDayBot.Constants
 {
+    /// <summary>
+    /// Represents faculty constants.
+    /// </summary>
     public static class FacultiesConstants
     {
+        /// <summary>
+        /// The university faculties.
+        /// </summary>
         public static readonly IReadOnlyCollection<string> Faculties = new HashSet<string>()
         {
             "КН", "КІУ", "АКТ", "ІТМ", "ІК", "ЕЛБІ", "ІРТЗІ"
         };
 
+        /// <summary>
+        /// The faculty full names.
+        /// </summary>
         public static readonly IReadOnlyDictionary<string, string> FacultyFullNames = new Dictionary<string, string>()
         {
             {"КН", "ФАКУЛЬТЕТ КОМП’ЮТЕРНИХ НАУК"},
@@ -18,6 +27,9 @@
             {"ІРТЗІ", "ФАКУЛЬТЕТ ІНФОРМАЦІЙНИХ РАДІОТЕХНОЛОГІЙ ТА ТЕХНІЧНОГО ЗАХИСТУ ІНФОРМАЦІЇ"},
         };
 
+        /// <summary>
+        /// The faculty open day info.
+        /// </summary>
         public static readonly IReadOnlyDictionary<string, string> FacultyOpenDayInfo = new Dictionary<string, string>()
         {
             { "КН", "🕐 Захід відбудеться 25 травня 2023 року о 13:00\n\nℹ️ Під час заходу абітурієнти матимуть змогу дізнатись докладніше про" +

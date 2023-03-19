@@ -4,6 +4,9 @@ using Telegram.Bot.Types.Enums;
 
 namespace NureOpenDayBot.CommandHandlers.ChatMemberUpdatedHandlers
 {
+    /// <summary>
+    /// Handles chat members updates.
+    /// </summary>
     public class ChatMemberUpdatedHandler : ITelegramCommandHandler
     {
         private readonly ChatMemberUpdated _chatMemberUpdated;
@@ -13,9 +16,12 @@ namespace NureOpenDayBot.CommandHandlers.ChatMemberUpdatedHandlers
             _chatMemberUpdated = chatMemberUpdated;
         }
 
+        /// <inheritdoc />
         public async Task HandleAsync(CancellationToken cancellationToken)
         {
             Console.WriteLine($"{_chatMemberUpdated.From.Username ?? _chatMemberUpdated.From.FirstName} - {_chatMemberUpdated.NewChatMember.Status}");
+
+            // If user resterted bot.
             if (_chatMemberUpdated.NewChatMember.Status == ChatMemberStatus.Member ||
                 _chatMemberUpdated.NewChatMember.Status == ChatMemberStatus.Creator)
             {
@@ -23,6 +29,7 @@ namespace NureOpenDayBot.CommandHandlers.ChatMemberUpdatedHandlers
                 return;
             }
 
+            // If user stopped and deleted the bot.
             if (_chatMemberUpdated.NewChatMember.Status == ChatMemberStatus.Kicked)
             {
                 ChatMemberRepository.DeleteChatMember(_chatMemberUpdated.From);

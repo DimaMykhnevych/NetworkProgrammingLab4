@@ -4,6 +4,9 @@ using Telegram.Bot.Types;
 
 namespace NureOpenDayBot.CommandHandlers.MessageHandlers
 {
+    /// <summary>
+    /// Handles get open day info request.
+    /// </summary>
     public class GetOpenDayInfoCommandHandler : ITelegramCommandHandler
     {
         private readonly ITelegramBotClient _telegramBotClient;
@@ -15,6 +18,7 @@ namespace NureOpenDayBot.CommandHandlers.MessageHandlers
             _message = message;
         }
 
+        /// <inheritdoc />
         public async Task HandleAsync(CancellationToken cancellationToken)
         {
             await _telegramBotClient.SendTextMessageAsync(

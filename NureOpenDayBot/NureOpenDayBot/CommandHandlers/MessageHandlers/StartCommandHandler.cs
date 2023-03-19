@@ -7,6 +7,9 @@ using Telegram.Bot.Types.Enums;
 
 namespace NureOpenDayBot.CommandHandlers.MessageHandlers
 {
+    /// <summary>
+    /// Handles start bot command.
+    /// </summary>
     public class StartCommandHandler : ITelegramCommandHandler
     {
         private const string welcomeMessage = "Вітаємо Вас в боті NURE Open Day Bot! 👋\n\n" +
@@ -22,9 +25,12 @@ namespace NureOpenDayBot.CommandHandlers.MessageHandlers
             _message = message;
         }
 
+        /// <inheritdoc />
         public async Task HandleAsync(CancellationToken cancellationToken)
         {
+            // Saving current user for statistics.
             ChatMemberRepository.AddChatMember(_message.From);
+
             await _telegramBotClient.SendTextMessageAsync(
                     chatId: _message.Chat.Id,
                     text: welcomeMessage,

@@ -7,6 +7,9 @@ using Telegram.Bot.Types;
 
 namespace NureOpenDayBot.CommandHandlers.MessageHandlers
 {
+    /// <summary>
+    /// Handles admin login.
+    /// </summary>
     public class AdminLoginCommandHandler : ITelegramCommandHandler
     {
         private const string validPassword = "12345";
@@ -19,9 +22,12 @@ namespace NureOpenDayBot.CommandHandlers.MessageHandlers
             _message = message;
         }
 
+        /// <inheritdoc />
         public async Task HandleAsync(CancellationToken cancellationToken)
         {
             var commandSplit = _message.Text?.Split(CommandConstants.AdminLoginCommand, StringSplitOptions.RemoveEmptyEntries);
+
+            // If command has invalid format
             if (commandSplit?.Length != 1)
             {
                 await _telegramBotClient.SendTextMessageAsync(
@@ -33,6 +39,8 @@ namespace NureOpenDayBot.CommandHandlers.MessageHandlers
             }
 
             var password = commandSplit[0].Trim();
+
+            // If user entered wrong password
             if (password != validPassword)
             {
                 await _telegramBotClient.SendTextMessageAsync(
@@ -43,6 +51,7 @@ namespace NureOpenDayBot.CommandHandlers.MessageHandlers
                 return;
             }
 
+            // Getting current chat members
             var members = ChatMemberRepository.GetChatMembers();
             StringBuilder sb = new("Поточні підписники боту: \n\n");
             foreach (var member in members)

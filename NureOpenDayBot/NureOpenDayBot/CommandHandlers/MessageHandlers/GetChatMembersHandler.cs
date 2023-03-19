@@ -6,6 +6,9 @@ using Telegram.Bot.Types.Enums;
 
 namespace NureOpenDayBot.CommandHandlers.MessageHandlers
 {
+    /// <summary>
+    /// Handles get chat members handler.
+    /// </summary>
     public class GetChatMembersHandler : ITelegramCommandHandler
     {
         private readonly ITelegramBotClient _telegramBotClient;
@@ -17,6 +20,7 @@ namespace NureOpenDayBot.CommandHandlers.MessageHandlers
             _message = message;
         }
 
+        /// <inheritdoc />
         public async Task HandleAsync(CancellationToken cancellationToken)
         {
             await _telegramBotClient.SendTextMessageAsync(

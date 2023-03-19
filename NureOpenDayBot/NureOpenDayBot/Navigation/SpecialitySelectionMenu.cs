@@ -3,6 +3,9 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace NureOpenDayBot.Navigation
 {
+    /// <summary>
+    /// Represents speciality selection menu.
+    /// </summary>
     public class SpecialitySelectionMenu
     {
         private readonly InlineKeyboardMarkup _inlineKeyboardMarkup;
@@ -10,6 +13,7 @@ namespace NureOpenDayBot.Navigation
 
         private SpecialitySelectionMenu()
         {
+            // There must be maximum 3 inline keyboard buttons per each row.
             List<List<InlineKeyboardButton>> facultyButtons = new();
             int columnsAmount = 3;
             int rowsAmount = FacultiesConstants.Faculties.Count / columnsAmount + 1;
@@ -45,6 +49,10 @@ namespace NureOpenDayBot.Navigation
             return _instance;
         }
 
+        /// <summary>
+        /// Gets speciality selection menu.
+        /// </summary>
+        /// <returns>The speciality selection menu.</returns>
         public InlineKeyboardMarkup GetSpecialitySelectionMenu()
         {
             return _inlineKeyboardMarkup;

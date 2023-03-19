@@ -3,6 +3,9 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace NureOpenDayBot.Navigation
 {
+    /// <summary>
+    /// Represents chat bot main menu.
+    /// </summary>
     public sealed class MainMenu
     {
         private readonly ReplyKeyboardMarkup _replyKeyboardMarkup;
@@ -26,6 +29,10 @@ namespace NureOpenDayBot.Navigation
             return _instance;
         }
 
+        /// <summary>
+        /// Gets main menu.
+        /// </summary>
+        /// <returns>Chat bot main menu.</returns>
         public ReplyKeyboardMarkup GetMainMenu()
         {
             return _replyKeyboardMarkup;

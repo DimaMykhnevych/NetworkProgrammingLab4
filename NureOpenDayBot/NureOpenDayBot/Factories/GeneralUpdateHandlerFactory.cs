@@ -6,6 +6,9 @@ using Telegram.Bot.Types.Enums;
 
 namespace NureOpenDayBot.Factories
 {
+    /// <summary>
+    /// General Update Handler Factory.
+    /// </summary>
     public class GeneralUpdateHandlerFactory : IGeneralUpdateHandlerFactory
     {
         private readonly ITelegramBotClient _telegramBotClient;
@@ -21,6 +24,7 @@ namespace NureOpenDayBot.Factories
             _callbackQueryHandlerFactory = new CallbackQueryHandlerFactory(_telegramBotClient);
         }
 
+        /// <inheritdoc />
         public ITelegramCommandHandler? Create(Update update)
         {
             if (update.Type == UpdateType.Message && update.Message?.Text != null)
